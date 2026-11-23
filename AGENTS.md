@@ -21,3 +21,5 @@ Use descriptive Markdown headings, backticks for paths and commands, and fenced 
 ## Commits and Pull Requests
 
 The history starts with `Initial commit` and has no established commit format. Use a short, descriptive subject such as `Document BIOS settings`. In pull requests, summarize the change, explain why it is needed, and state how you verified it. Link related issues when available and include screenshots when they help reviewers verify a result.
+
+Include `Co-authored-by: Codex <codex@openai.com>` in every commit Codex creates, with a blank line before the trailer block.
