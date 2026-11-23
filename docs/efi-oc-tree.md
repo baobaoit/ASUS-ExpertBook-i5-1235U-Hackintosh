@@ -6,7 +6,7 @@ Captured from `/Volumes/NO NAME/EFI/OC` on 2026-11-23. The tree records 156 file
 
 ## Expected differences
 
-- `Tools/` is empty in this snapshot. A fresh Git checkout may omit it.
+- `Tools/` is empty on the internal EFI. The repository tracks `Tools/.gitkeep` to include the directory in fresh checkouts.
 
 ## Full directory tree
 

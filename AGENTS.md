@@ -6,7 +6,7 @@ This repository contains the OpenCore configuration for an ASUS ExpertBook with 
 
 - `EFI/OC/` contains `config.plist` and `OpenCore.efi`. Supply the matching `EFI/BOOT/BOOTx64.efi` separately when preparing a standalone USB boot drive.
 - `EFI/OC/ACPI/`, `EFI/OC/Drivers/`, and `EFI/OC/Kexts/` hold compiled ACPI tables, UEFI drivers, and kernel extensions, respectively.
-- `EFI/OC/Resources/` holds picker fonts, images, and labels. The repository tracks no entries under `EFI/OC/Tools/`.
+- `EFI/OC/Resources/` holds picker fonts, images, and labels. The repository tracks `EFI/OC/Tools/.gitkeep` to keep the tools directory in fresh checkouts.
 - `docs/efi-oc-tree.md` records the expected `EFI/OC/` paths. `docs/licenses/` holds the notices and licenses for the bundled audio kexts.
 
 ## Development and Verification
