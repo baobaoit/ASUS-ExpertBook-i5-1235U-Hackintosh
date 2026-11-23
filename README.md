@@ -11,7 +11,7 @@ OpenCore configuration for an ASUS ExpertBook with a 12th-generation Intel Core 
 | Integrated graphics | Intel Iris Xe-eligible graphics. The EFI enables WhateverXe 0.8.3. |
 | OpenCore | Bundled as `EFI/OC/OpenCore.efi`. Exact release is unverified. |
 | SMBIOS model | `MacBookPro16,2` |
-| macOS | Tahoe (Darwin 25) is a configuration target, inferred from the minimum kernel version for ForbiddenItlwm and BTLEAdvFixup. Tested releases are undocumented. |
+| macOS | Targets Tahoe (Darwin 25). The internal EFI booted Tahoe 26.7.3 (25G342) for the speaker playback check. |
 
 Processor specifications are from [Intel](https://www.intel.com/content/www/us/en/products/sku/226261/intel-core-i51235u-processor-12m-cache-up-to-4-40-ghz/specifications.html).
 

@@ -2,7 +2,7 @@
 
 ## Snapshot
 
-Captured from `/Volumes/NO NAME/EFI/OC` on 2026-11-23. The tree records 156 files and 122 directories under `EFI/OC/`. It records paths only and omits macOS Finder and AppleDouble metadata such as `.DS_Store` and `._*`. The root `config.plist` appears by filename only.
+Captured from `/Volumes/NO NAME/EFI/OC` on 2026-11-23. The tree records 156 files and 122 directories under `EFI/OC/`, including the AppleALC and SimpleHDA bundles shared by the repo and internal EFI. It records paths only and omits macOS Finder and AppleDouble metadata such as `.DS_Store` and `._*`. The root `config.plist` appears by filename only.
 
 ## Expected differences
 
@@ -296,4 +296,5 @@ EFI/OC/
 
 1. Enumerate actual entries under the `EFI/OC/` being verified. Compare relative paths, file and directory types, and exact capitalization at every depth, including `Contents/PlugIns/` directories. Apply the listed expected differences when checking the repository.
 2. After copying or moving components, repeat the comparison on the destination. Verify that each enabled `Kernel → Add` entry matches the exact on-disk `BundlePath`, `PlistPath`, and any `ExecutablePath`.
-3. Report unexpected missing, extra, or misnamed paths. Refresh this snapshot only for intentional layout changes after verifying the new tree against the intended source.
+3. Compare copied files byte-for-byte. When comparing `config.plist` settings, exclude `PlatformInfo` from the comparison and its output unless explicitly requested.
+4. Report unexpected missing, extra, or misnamed paths. Refresh this snapshot only for intentional layout changes after verifying the new tree against the intended source.
