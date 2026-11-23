@@ -22,6 +22,8 @@ Use descriptive Markdown headings, backticks for paths and commands, and fenced 
 
 Keep `MLB`, `ROM`, `SystemSerialNumber`, and `SystemUUID` blank under `PlatformInfo → Generic` in the tracked configuration. Set personal values in a private test EFI and remove identifying information from shared logs and screenshots.
 
+When comparing `config.plist` files, exclude the entire `PlatformInfo` section from the comparison and its output unless the user explicitly asks to compare it.
+
 ## Commits and Pull Requests
 
 Use a short, descriptive commit subject. Recent EFI commits use the `feat(efi):` prefix for feature changes. In pull requests, summarize the change, explain why it is needed, and state how you verified it. Link related issues when available and include screenshots when they help reviewers verify a result.
