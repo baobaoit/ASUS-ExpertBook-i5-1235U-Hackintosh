@@ -12,6 +12,12 @@ This repository contains the OpenCore configuration for an ASUS ExpertBook with 
 
 There is no build system or automated test runner. After EFI changes, run `plutil -lint EFI/OC/config.plist` on macOS to check plist syntax. Confirm the bundled OpenCore release and use its matching `ocvalidate` binary to check the configuration with `ocvalidate EFI/OC/config.plist`. If the release or validator is unavailable, record which checks you completed.
 
+Use the [EFI directory baseline](docs/efi-oc-tree.md) when verifying the repository or internal EFI. Account for the documented differences and update the baseline only for intentional layout changes.
+
+When verifying a mounted internal EFI such as `/Volumes/NO NAME/EFI/OC`, enumerate the actual entries under `Kexts/` and recursively compare their relative paths with the intended source. Every file and folder name must match exactly, including capitalization and nested `Contents/PlugIns/` paths. Report any missing, extra, or misnamed paths. Compare actual names so a case-insensitive filesystem cannot hide a mismatch. Repeat this check on the destination after any copy or move, including operations performed by Python scripts.
+
+Check `VoodooPS2Controller.kext/Contents/PlugIns/` for the keyboard and `VoodooI2C.kext/Contents/PlugIns/` for the trackpad. A directory such as `FSCK0000.000` in either bundle is a mismatch even if its contents match the expected plug-in. Confirm that every enabled `Kernel → Add` entry uses the exact on-disk names for its `BundlePath`, `PlistPath`, and any `ExecutablePath`.
+
 For hardware testing, record the exact ExpertBook model, BIOS revision, macOS build, and observed boot and device behavior. For keyboard changes, test input in the OpenCore picker and in macOS. The configuration enables `Ps2KeyboardDxe.efi` for the picker and `VoodooPS2Keyboard.kext` for macOS.
 
 Run `git status --short` to review changed and untracked files. Run `git diff --check` for unstaged changes and `git diff --cached --check` for staged changes. For documentation changes, check Markdown rendering, links, and command examples.
