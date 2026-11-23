@@ -17,7 +17,7 @@ Processor specifications are from [Intel](https://www.intel.com/content/www/us/e
 
 ## Feature status
 
-The table describes what the EFI enables. Boot and device behavior on the ExpertBook still need documented test results.
+The table describes what the EFI enables and which device checks have been performed.
 
 | Feature | Configuration and verification status |
 | --- | --- |
@@ -26,7 +26,8 @@ The table describes what the EFI enables. Boot and device behavior on the Expert
 | Ethernet | IntelMausiEthernet is enabled. The controller model and link behavior are unverified. |
 | Keyboard and trackpad | VoodooPS2Keyboard and VoodooI2C/VoodooI2CHID are enabled. Input and gestures are unverified. |
 | USB and battery | USBToolBox with UTBMap and SMCBatteryManager are enabled. Port mapping and battery reporting are unverified. |
-| Audio, webcam, and sleep/wake | Test results are undocumented. |
+| Audio | AppleALC 1.9.8 and SimpleHDA 1.0.2 are enabled for the Realtek ALC256 with `alcid=41`. The internal EFI completed a built-in speaker playback test on macOS Tahoe 26.7.3 (25G342). The internal microphone still needs a fix. |
+| Webcam and sleep/wake | Test results are undocumented. |
 
 ## EFI layout
 
@@ -75,3 +76,5 @@ The repository leaves the four machine-specific fields blank. Make a private cop
 ## Credits and license
 
 Thanks to the OpenCore, kext, and tooling maintainers. The repository license is in [LICENSE](LICENSE). Bundled third-party components retain their upstream licenses.
+
+See the [AppleALC license](docs/licenses/AppleALC-LICENSE.txt) and the [SimpleHDA notice](docs/licenses/SimpleHDA-NOTICE.md), along with the licenses packaged with SimpleHDA for [XNU](docs/licenses/SimpleHDA-xnu-APPLE_LICENSE.txt) and [Lilu](docs/licenses/SimpleHDA-Lilu-LICENSE.txt).

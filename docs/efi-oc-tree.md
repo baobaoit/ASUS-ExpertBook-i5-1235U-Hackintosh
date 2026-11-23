@@ -6,7 +6,6 @@ Captured from `/Volumes/NO NAME/EFI/OC` on 2026-11-23. The tree records 156 file
 
 ## Expected differences
 
-- `Kexts/AppleALC.kext/` and `Kexts/SimpleHDA.kext/` and their contents are present on the internal EFI. The repository omits these bundles.
 - `Tools/` is empty in this snapshot. A fresh Git checkout may omit it.
 
 ## Full directory tree
