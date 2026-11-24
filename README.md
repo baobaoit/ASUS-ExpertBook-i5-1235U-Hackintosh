@@ -32,7 +32,7 @@ OpenCore EFI for the ASUS ExpertBook with an Intel Core i5-1235U. The internal E
 | Boot | Working | Internal EFI booted the Tahoe build listed above. |
 | Built-in speakers | Working | Playback confirmed with `alcid=41`. |
 | Internal microphone | Needs a fix | Microphone capture remains unresolved. |
-| Graphics and brightness | Working | Display output and brightness control confirmed. Metal acceleration remains unverified. |
+| Graphics and brightness | Working | Display output and brightness control work. A Metal compute shader on the Intel iGPU doubled four integers and returned all four expected values. Metal rendering remains unverified. |
 | Wi-Fi | Working | Wireless connectivity confirmed with ForbiddenItlwm 0.6.0 enabled. |
 | Bluetooth and Continuity | Unverified | IntelBluetoothFirmware and BlueToolFixup are enabled. |
 | Ethernet | Unverified | IntelMausiEthernet is enabled. |
