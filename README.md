@@ -1,46 +1,56 @@
 # ASUS ExpertBook i5-1235U Hackintosh
 
-OpenCore configuration for an ASUS ExpertBook with a 12th-generation Intel Core i5-1235U (Alder Lake-U). This repository contains the `EFI/OC` configuration and its bundled components. The standard UEFI fallback loader, `EFI/BOOT/BOOTx64.efi`, must be supplied separately for a standalone USB boot setup.
+OpenCore EFI for the ASUS ExpertBook with an Intel Core i5-1235U. The internal EFI booted macOS Tahoe 26.7.3 and passed a built-in speaker playback test. The internal microphone still needs a fix.
 
-## Target hardware and configuration
+## Hardware specifications
 
-| Item | Details |
+| Component | Details |
 | --- | --- |
-| Laptop | ASUS ExpertBook. Exact model suffix and BIOS revision are undocumented. |
-| CPU | Intel Core i5-1235U, 10 cores (2 performance, 8 efficiency), 12 threads |
-| Integrated graphics | Intel Iris Xe-eligible graphics. The EFI enables WhateverXe 0.8.3. |
-| OpenCore | Bundled as `EFI/OC/OpenCore.efi`. Exact release is unverified. |
-| SMBIOS model | `MacBookPro16,2` |
-| macOS | Targets Tahoe (Darwin 25). The internal EFI booted Tahoe 26.7.3 (25G342) for the speaker playback check. |
+| Laptop | ASUS ExpertBook (exact model suffix unconfirmed) |
+| Processor | Intel Core i5-1235U (Alder Lake-U), 2 performance cores, 8 efficiency cores, 12 threads |
+| Integrated graphics | Intel integrated graphics (Iris Xe eligible) |
+| Memory | 16 GB DDR4, 3200 MHz reported by macOS |
+| NVMe storage | Solidigm SSDPFKNU512GZ |
+| Audio codec | Realtek ALC256 |
+| Display panel and wireless card | Exact models unconfirmed |
 
-Processor specifications are from [Intel](https://www.intel.com/content/www/us/en/products/sku/226261/intel-core-i51235u-processor-12m-cache-up-to-4-40-ghz/specifications.html).
+[Intel processor specifications](https://www.intel.com/content/www/us/en/products/sku/226261/intel-core-i51235u-processor-12m-cache-up-to-4-40-ghz/specifications.html)
+
+## Test environment
+
+| Item | Recorded value |
+| --- | --- |
+| macOS | Tahoe 26.7.3 (25G342), booted from the internal EFI |
+| BIOS revision | Unconfirmed |
+| OpenCore release | Exact version of the bundled binary is unverified |
+| SMBIOS model | `MacBookPro16,2` |
 
 ## Feature status
 
-The table describes what the EFI enables and which device checks have been performed.
+| Feature | Result | Test or configuration detail |
+| --- | --- | --- |
+| Boot | Working | Internal EFI booted the Tahoe build listed above. |
+| Built-in speakers | Working | Playback confirmed with `alcid=41`. |
+| Internal microphone | Needs a fix | Microphone capture remains unresolved. |
+| Graphics and brightness | Working | Display output and brightness control confirmed. Metal acceleration remains unverified. |
+| Wi-Fi | Working | Wireless connectivity confirmed with ForbiddenItlwm 0.6.0 enabled. |
+| Bluetooth and Continuity | Unverified | IntelBluetoothFirmware and BlueToolFixup are enabled. |
+| Ethernet | Unverified | IntelMausiEthernet is enabled. |
+| Keyboard and trackpad | Working | Keyboard input works in the OpenCore picker and in macOS. Trackpad input and multitouch gestures work in macOS. |
+| USB and battery | Working | USB connectivity and battery reporting confirmed. |
+| Webcam and sleep/wake | Unverified | No test results recorded. |
 
-| Feature | Configuration and verification status |
+## EFI configuration
+
+| Component | Configuration |
 | --- | --- |
-| Graphics and brightness | WhateverXe and BrightnessKeys are enabled. Internal display output, brightness controls, and Metal acceleration are unverified. Check the matching [WhateverXe release instructions](https://github.com/b00t0x/WhateverXe/releases) for any macOS-side requirements. |
-| Wi-Fi and Bluetooth | ForbiddenItlwm 0.6.0, IntelBluetoothFirmware, and BlueToolFixup are enabled. The wireless card model, connectivity, and Continuity features are unverified. |
-| Ethernet | IntelMausiEthernet is enabled. The controller model and link behavior are unverified. |
-| Keyboard and trackpad | VoodooPS2Keyboard and VoodooI2C/VoodooI2CHID are enabled. Input and gestures are unverified. |
-| USB and battery | USBToolBox with UTBMap and SMCBatteryManager are enabled. Port mapping and battery reporting are unverified. |
-| Audio | AppleALC 1.9.8 and SimpleHDA 1.0.2 are enabled for the Realtek ALC256 with `alcid=41`. The internal EFI completed a built-in speaker playback test on macOS Tahoe 26.7.3 (25G342). The internal microphone still needs a fix. |
-| Webcam and sleep/wake | Test results are undocumented. |
+| Audio | Lilu loads before AppleALC 1.9.8 and SimpleHDA 1.0.2. SimpleHDA targets x86_64 on Darwin 25 or later. `DisableLinkeditJettison` is enabled. |
+| Graphics | WhateverXe is enabled. Check the [WhateverXe release notes](https://github.com/b00t0x/WhateverXe/releases) for macOS-side requirements. |
+| Keyboard and trackpad | Ps2KeyboardDxe provides picker keyboard support. VoodooPS2Keyboard handles the macOS keyboard. VoodooI2C and VoodooI2CHID handle the trackpad. |
+| UEFI drivers | OpenRuntime, OpenCanopy, ResetNvramEntry, Ps2KeyboardDxe, HfsPlus, apfs_aligned, ext4_x64, and OpenLinuxBoot are enabled. |
+| ACPI | Eleven enabled SSDTs cover devices including the embedded controller, GPIO, backlight, and USB. |
 
-## EFI layout
-
-```text
-EFI/
-└── OC/
-    ├── config.plist
-    ├── OpenCore.efi
-    ├── ACPI/
-    ├── Drivers/
-    ├── Kexts/
-    └── Resources/
-```
+See the [EFI directory tree](docs/efi-oc-tree.md) for exact filenames and the [OpenCore configuration](EFI/OC/config.plist) for load order.
 
 ## Generate your SMBIOS identity
 
